@@ -1,0 +1,8 @@
+langgraph
+rich
+langchain_core
+selenium
+bs4
+aiosqlite
+langchain_openai
+langchain_anthropic
