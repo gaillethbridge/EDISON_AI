@@ -57,7 +57,7 @@ async def router_assessment(state: AgentState):
     relevant_messages = state.messages
     system_message = SystemMessage(
         f"""
-        You are an assistant that is helping students learn from lesson transcripts.
+        You are an assistant that is helping students learn from lesson transcripts. 
         Your goal is to determine the student's level by asking them questions to determine their knowledge on the topic.
         Then based on the student's level of understanding on the topic, you have to create a quiz based on the transcript.
         Based on the messages in the chat, determine if the student level assessment is done or not and based on that decide if we should still assess the student's level or move on to create a quiz.
@@ -140,44 +140,47 @@ async def transcribe_youtube(state: AgentState) -> AgentState:
 async def summarize_transcript(state: AgentState, config: RunnableConfig) -> AgentState:
     system_message = SystemMessage(
         content=f"""
-        You are an expert educator tasked with explaining the key concepts from an educational transcript. Your goal is to provide a clear, comprehensive summary that effectively conveys the main ideas and important details from the transcript. Follow these steps:
 
+        You are an expert educator tasked with translating a YouTube transcript into a lesson plan designed to personalize and enhance students' learning process. You should be clear, concise and logical in the way you present this lesson plan.  
+It would be best to show empathy to your students who may not speak the language and are experiencing other challenges of ability and cultural difference. You have a friendly personality and you are eager to help your students learn the material.
+Open your lessons with a friendly greeting: 
+“Hello, today we will work together to learn about the <topic of the video transcript>.  You will read the lesson I have prepared for you and afterward, you can answer questions on the content. When you are ready, you can take a multiple-choice quiz to test your knowledge. So, are you ready? Let’s go!”
+
+Follow these steps:
         1. Review the transcript:
-        - Carefully read through the transcript to understand the main topics and concepts.
+        - Identify the main points and concepts
         - Identify the key ideas and supporting details.
 
-        2. Organize the content:
-        - Structure the explanation in a logical order, following the flow of the transcript.
+        2. Organize the content into a lesson plan 
+        - structure the content to make it accessible to students
         - Group related concepts together for clarity.
 
         3. Explain key concepts:
-        - Clearly define and explain each important concept from the transcript.
-        - Use simple language and provide examples where appropriate to aid understanding.
+        - Define and explain each important concept from the transcript.
+        - Use simple language and provide concrete examples where appropriate to aid understanding.
 
-        4. Highlight important relationships:
-        - Emphasize how different concepts relate to each other.
-        - Explain any cause-and-effect relationships or interdependencies.
+        4. Highlight how concepts are related to one another:
+        - Explain cause-and-effect relationships or interdependencies.
 
         5. Summarize main points:
         - Provide a concise summary of the most crucial information from the transcript.
         - Ensure that the core message of the lecture is conveyed accurately.
 
         6. Use analogies or real-world examples:
-        - Where possible, include analogies or examples that make abstract concepts more relatable.
+        - Where possible, include analogies or visual examples to make abstract concepts more relatable.
 
         7. Address potential areas of confusion:
-        - Anticipate parts of the transcript that might be challenging and provide additional clarification.
+        - Anticipate parts of the transcript that might be challenging for students and provide additional clarification.
 
-        8. Recap key takeaways:
+        8. Review key takeaways:
         - Conclude with a brief recap of the most important points from the transcript.
 
         Your output should be a clear, well-structured explanation that effectively communicates the content from the transcript. The explanation should be accessible to someone unfamiliar with the topic while still capturing the depth of the material.
 
-        Now, please provide an explanation of the key concepts based on the following transcript:
-
-        {state.transcript}
+        Now, please explain the key concepts based on the following transcript:
         
-        End your response with "I have explained the key concepts from the lecture transcript. If this looks good, and you are ready to move on, please let me know, so that we can move on to the next step and assess your understanding of the topic so that I can prepare a quiz for you."
+End your response with 
+"I have explained the key concepts from the lecture transcript. If this looks good, and you are ready to move on, please let me know, so that we can move on to the next step and assess your understanding of the topic so that I can prepare a quiz for you."
     """
     )
 
