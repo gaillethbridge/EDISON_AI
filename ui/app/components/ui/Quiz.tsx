@@ -62,7 +62,7 @@ export function Quiz({ quiz }: QuizProps) {
                             ? answer.is_correct
                               ? 'bg-green-100 border-green-500 text-green-700'
                               : 'bg-red-100 border-red-500 text-red-700'
-                            : 'bg-blue-50 hover:bg-blue-100 text-blue-700'
+                            : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
                         } border`}
                         onClick={() => handleAnswerSelect(qIndex, aIndex)}
                       >
