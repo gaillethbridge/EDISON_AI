@@ -261,13 +261,25 @@ async def extract_question_response(
         ]
     )
 
-    # Update existing assessment with new data
+    # Initialize a new StudentLevelAssessment if none exists
     if state.assessment is None:
-        state.assessment = new_assessment
-    else:
-        for field, value in new_assessment.dict().items():
-            if value is not None:
-                setattr(state.assessment, field, value)
+        state.assessment = StudentLevelAssessment(
+            assessment=StudentAssessment(),
+            overall_level="",
+            strengths=[],
+            areas_for_improvement=[]
+        )
+
+    # Update existing assessment with new data
+    if new_assessment:
+        if new_assessment.assessment:
+            state.assessment.assessment = new_assessment.assessment
+        if new_assessment.overall_level:
+            state.assessment.overall_level = new_assessment.overall_level
+        if new_assessment.strengths:
+            state.assessment.strengths = new_assessment.strengths
+        if new_assessment.areas_for_improvement:
+            state.assessment.areas_for_improvement = new_assessment.areas_for_improvement
 
     return {"assessment": state.assessment}
 

@@ -5,27 +5,8 @@ description = ""
 authors = ["shrey shah <shrey.shah@vivun.com>"]
 readme = "README.md"
 
-[project]
-name = "edison-ai"
-version = "0.0.1"
-dependencies = [
-  "langgraph",
-  "langchain_core",
-  "langchain_openai",
-  "langchain",
-  "openai",
-  "langchain-community",
-  "copilotkit",
-  "uvicorn",
-  "python-dotenv",
-  "bs4",
-  "rich",
-  "aiosqlite",
-  "langchain-anthropic",
-]
-
 [tool.poetry.dependencies]
-python = "3.12.2"
+python = "^3.12"
 langgraph = "^0.2.34"
 langchain-core = "^0.3.8"
 langchain-openai = "^0.2.1"
@@ -42,12 +23,9 @@ selenium = "^4.26.1"
 aiosqlite = "^0.20.0"
 youtube-transcript-api = "^0.6.2"
 
-
-
-
-[build-system]
-requires = ["setuptools >= 61.0"]
-build-backend = "setuptools.build_meta"
-
 [tool.poetry.scripts]
 edison-ai = "edison_ai.app:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

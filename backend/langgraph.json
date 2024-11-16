@@ -3,7 +3,7 @@
   "dockerfile_lines": [],
   "dependencies": ["."],
   "graphs": {
-    "my_agent": "./edison_ai/agent.py:graph"
+    "edison_ai": "./edison_ai/agent.py:graph"
   },
   "env": ".env"
 }
