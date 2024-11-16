@@ -24,6 +24,7 @@ from .schema import (
     SUMMARIZE_TRANSCRIPT,
     YouTubeURLParser,
     TRANSCRIBE_YOUTUBE,
+    Quiz,
 )
 from langgraph.checkpoint.memory import MemorySaver
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -192,54 +193,50 @@ async def summarize_transcript(state: AgentState, config: RunnableConfig) -> Age
 async def create_quiz(state: AgentState, config: RunnableConfig) -> AgentState:
     system_message = SystemMessage(
         content=f"""
-    Your role is to create a quiz based on the transcript and the student's assessed level. Follow these steps to create an effective and tailored quiz:
+    Your role is to create a structured quiz based on the transcript and the student's assessed level. The quiz should be output as a structured JSON object following the Quiz schema.
 
     Here is the transcript for reference: {state.lesson_explanation}
 
-    1. Analyze the transcript:
-       - Identify the main topics and key concepts covered.
-       - Note the order in which topics are presented.
+    Student assessment: {state.assessment or "No assessment available"}
 
-    2. Consider the student's level:
-       - Review the previous assessment of the student's understanding.
-       - Adjust the difficulty of questions based on this assessment.
+    Create a quiz that:
+    1. Matches the student's assessed level
+    2. Covers the key concepts from the transcript
+    3. Includes a mix of question difficulties
+    4. Tests different cognitive skills (recall, comprehension, application, etc.)
+    5. Provides explanations for correct and incorrect answers
 
-    3. Create multiple-choice questions:
-       - Develop questions that test various levels of understanding (recall, comprehension, application, analysis).
-       - Ensure questions follow the order of topics in the transcript.
-       - Write clear, concise questions in the same language as the transcript.
+    Each question should include:
+    - Clear question text
+    - 4 possible answers (1 correct, 3 incorrect)
+    - Difficulty level
+    - Topic covered
+    - Skill being tested
+    - Explanations for answers
 
-    4. Design answer choices:
-       - Create one correct answer and 3-4 plausible distractors for each question.
-       - Avoid obvious incorrect answers or trick questions.
-
-    5. Balance the quiz:
-       - Include a mix of easy, moderate, and challenging questions based on the student's level.
-       - Aim for comprehensive coverage of the transcript's content.
-
-    6. Format the quiz:
-       - Present questions in a clear, organized manner.
-       - Number questions sequentially.
-       - Provide clear instructions at the beginning of the quiz.
-
-    7. Review and refine:
-       - Ensure all questions are relevant, clear, and free of errors.
-       - Verify that the quiz accurately reflects the transcript's content and the student's assessed level.
-
-    Output the complete quiz, including instructions, questions, and answer choices. Aim for a quiz that challenges the student appropriately while reinforcing key concepts from the transcript.
+    Format the output as a Quiz object following this schema:
+    ```json
+    {Quiz.schema_json()}
+    ```
     """
     )
 
-    console.print(
-        Panel(Markdown(state.lesson_explanation), title="Transcript", border_style="green")
+    response = await model.with_structured_output(Quiz).ainvoke(
+        [system_message, *state.messages]
     )
-    response = await model.ainvoke([system_message, *state.messages])
+    
     console.print(
-        Panel(Markdown(response.content), title="Generated Quiz", border_style="yellow")
+        Panel(
+            Markdown(json.dumps(response.dict(), indent=2)),
+            title="Generated Quiz",
+            border_style="yellow"
+        )
     )
-    return {"messages": [AIMessage(content=response.content)],
-            "quiz": response.content
-            }
+    
+    return {
+        # "messages": [AIMessage(content=json.dumps(response.dict(), indent=2))],
+        "quiz": response
+    }
 
 
 async def extract_question_response(

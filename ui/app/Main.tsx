@@ -8,7 +8,99 @@ import { Progress } from "./components/ui/Progress";
 import { AgentState } from "./lib/types";
 import { TextDisplay } from "./components/ui/TextDisplay";
 import { Quiz } from "./components/ui/Quiz";
-
+const sampleQuiz: Quiz = {
+  title: "Introduction to Machine Learning Concepts",
+  description: "A comprehensive quiz covering basic machine learning concepts, algorithms, and applications",
+  instructions: "Select the best answer for each question. Each question has one correct answer. Take your time to read each question and explanation carefully.",
+  difficulty_level: "moderate",
+  target_skills: ["recall", "comprehension", "application", "analysis"],
+  questions: [
+    {
+      question: "What is the primary difference between supervised and unsupervised learning?",
+      answers: [
+        {
+          text: "Supervised learning uses labeled data for training, while unsupervised learning works with unlabeled data",
+          is_correct: true,
+          explanation: "This is correct. Supervised learning algorithms learn from labeled examples to make predictions, while unsupervised learning finds patterns in unlabeled data."
+        },
+        {
+          text: "Supervised learning is faster than unsupervised learning",
+          is_correct: false,
+          explanation: "This is incorrect. The speed of learning depends on the specific algorithm and dataset, not whether it's supervised or unsupervised."
+        },
+        {
+          text: "Supervised learning requires no human intervention",
+          is_correct: false,
+          explanation: "This is incorrect. Supervised learning actually requires human intervention to label the training data."
+        },
+        {
+          text: "Unsupervised learning always produces better results",
+          is_correct: false,
+          explanation: "This is incorrect. The effectiveness depends on the specific problem and use case, not the type of learning."
+        }
+      ],
+      difficulty: "moderate",
+      topic: "Machine Learning Fundamentals",
+      skill_tested: "comprehension"
+    },
+    {
+      question: "Which of the following is an example of a regression problem?",
+      answers: [
+        {
+          text: "Predicting house prices based on square footage and location",
+          is_correct: true,
+          explanation: "This is correct. Predicting a continuous numerical value (price) based on features is a classic regression problem."
+        },
+        {
+          text: "Classifying emails as spam or not spam",
+          is_correct: false,
+          explanation: "This is incorrect. This is an example of binary classification, not regression."
+        },
+        {
+          text: "Grouping customers by purchasing behavior",
+          is_correct: false,
+          explanation: "This is incorrect. This is an example of clustering, which is unsupervised learning."
+        },
+        {
+          text: "Identifying objects in images",
+          is_correct: false,
+          explanation: "This is incorrect. This is an example of image classification, not regression."
+        }
+      ],
+      difficulty: "easy",
+      topic: "Types of Machine Learning Problems",
+      skill_tested: "application"
+    },
+    {
+      question: "What potential issue might arise if your training data is not representative of the real-world data?",
+      answers: [
+        {
+          text: "Model bias and poor generalization to new data",
+          is_correct: true,
+          explanation: "This is correct. When training data doesn't represent the real world, the model may learn biased patterns and perform poorly on actual data."
+        },
+        {
+          text: "Faster training times",
+          is_correct: false,
+          explanation: "This is incorrect. Training data representativeness doesn't directly affect training speed."
+        },
+        {
+          text: "Improved model accuracy",
+          is_correct: false,
+          explanation: "This is incorrect. Non-representative data typically leads to worse, not better, accuracy."
+        },
+        {
+          text: "Lower computational requirements",
+          is_correct: false,
+          explanation: "This is incorrect. Data representativeness is unrelated to computational requirements."
+        }
+      ],
+      difficulty: "challenging",
+      topic: "Model Training and Evaluation",
+      skill_tested: "analysis"
+    }
+  ]
+};
 
 export function Main() {
   const {
@@ -17,64 +109,7 @@ export function Main() {
     name: "edison_ai",
     initialState: {
       messages: [{ content: "" }],
-      quiz: `Quiz Questions:
-What is the primary purpose of LangChain?
-
-A) To replace GPT-4 with a new language model.
-B) To enhance AI capabilities by integrating LLMs with external data and resources.
-C) To provide a new programming language for AI development.
-D) To create a standalone AI application without external data.
-How does LangChain handle data for AI applications?
-
-A) It stores data in a traditional database for easy access.
-B) It divides data into smaller chunks and stores them as embeddings in a vector database.
-C) It uses cloud storage to keep all data centralized.
-D) It relies on the LLM's internal memory to manage data.
-Which of the following is NOT a core component of LangChain?
-
-A) LLM Wrappers
-B) Prompt Templates
-C) Neural Networks
-D) Agents
-What is the role of 'Chains' in LangChain?
-
-A) To connect multiple LLMs together for enhanced performance.
-B) To combine multiple components to solve tasks and build applications.
-C) To encrypt data before storing it in a vector database.
-D) To provide a user interface for AI applications.
-In what way can LangChain be applied in the field of education?
-
-A) By replacing teachers with AI models.
-B) By enabling LLMs to reference entire syllabi to aid learning.
-C) By creating educational games for students.
-D) By developing new educational theories.
-What is the significance of 'Agents' in LangChain?
-
-A) They are used to store data securely.
-B) They enable LLMs to interact with external APIs.
-C) They provide a graphical interface for users.
-D) They are responsible for training the LLMs.
-Which programming languages are available for LangChain?
-
-A) Java and C++
-B) Python and TypeScript
-C) Ruby and Swift
-D) PHP and JavaScript
-What is a practical example of using LangChain mentioned in the transcript?
-
-A) Developing a new operating system.
-B) Setting up LangChain to interact with LLMs and vector stores.
-C) Creating a social media platform.
-D) Designing a new AI language model.
-Answers:
-B
-B
-C
-B
-B
-B
-B
-B`,
+      quiz: sampleQuiz
     },
   });
 

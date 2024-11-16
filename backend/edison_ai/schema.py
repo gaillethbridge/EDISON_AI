@@ -80,3 +80,23 @@ class AgentState(BaseModel):
     logs: List[Log] = Field(default_factory=list)
     transcript: Optional[str] = Field(default=None)
     quiz: Optional[str] = Field(default=None)
+
+class QuizAnswer(BaseModel):
+    text: str = Field(description="The answer text")
+    is_correct: bool = Field(description="Whether this is the correct answer")
+    explanation: Optional[str] = Field(default=None, description="Explanation for why this answer is correct or incorrect")
+
+class QuizQuestion(BaseModel):
+    question: str = Field(description="The question text")
+    answers: List[QuizAnswer] = Field(description="List of possible answers")
+    difficulty: str = Field(description="Difficulty level of the question (easy, moderate, or challenging)")
+    topic: str = Field(description="The main topic this question covers")
+    skill_tested: str = Field(description="The type of skill being tested (recall, comprehension, application, etc.)")
+
+class Quiz(BaseModel):
+    title: str = Field(description="Title of the quiz")
+    description: str = Field(description="Brief description of the quiz content")
+    instructions: str = Field(description="Instructions for taking the quiz")
+    questions: List[QuizQuestion] = Field(description="List of quiz questions")
+    difficulty_level: str = Field(description="Overall difficulty level of the quiz")
+    target_skills: List[str] = Field(description="List of skills being tested in this quiz")
