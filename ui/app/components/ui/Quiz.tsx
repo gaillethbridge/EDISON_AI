@@ -26,8 +26,8 @@ export function Quiz({ quiz }: QuizProps) {
         <div className="h-[calc(100vh-2rem)] overflow-y-auto space-y-6">
           {/* Quiz Header */}
           <div className="space-y-2">
-            <h1 className="text-2xl font-bold">{quiz.title}</h1>
-            <p className="text-gray-600">{quiz.description}</p>
+            <h1 className="text-2xl font-bold">Welcome to Edison AI's Quiz!</h1>
+            <p className="text-gray-600">Let's make learning fun and interactive!</p>
             <p className="text-sm text-gray-500 italic">{quiz.instructions}</p>
             <div className="flex gap-2 text-xs text-gray-500">
               <span>Difficulty: {quiz.difficulty_level}</span>
@@ -60,9 +60,9 @@ export function Quiz({ quiz }: QuizProps) {
                         className={`w-full text-left p-3 rounded-md transition-colors ${
                           selectedAnswers[qIndex] === aIndex
                             ? answer.is_correct
-                              ? 'bg-green-100 border-green-500'
-                              : 'bg-red-100 border-red-500'
-                            : 'bg-gray-50 hover:bg-gray-100'
+                              ? 'bg-green-100 border-green-500 text-green-700'
+                              : 'bg-red-100 border-red-500 text-red-700'
+                            : 'bg-blue-50 hover:bg-blue-100 text-blue-700'
                         } border`}
                         onClick={() => handleAnswerSelect(qIndex, aIndex)}
                       >

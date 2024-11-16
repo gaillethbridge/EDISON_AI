@@ -12,6 +12,7 @@ export function TextDisplay({ state }: TextDisplayProps) {
         <div className="h-[calc(100vh-2rem)] overflow-y-auto">
           <p className="text-lg font-bold">Video transcript</p>
           <ReactMarkdown>{state.lesson_explanation}</ReactMarkdown>
+          <p>Hello! I'm Edison AI, your friendly teaching assistant. Let's dive into today's lesson!</p>
         </div>
       </div>
     </div>

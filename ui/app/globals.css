@@ -7,6 +7,8 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #f0f8ff; /* Light blue background */
+  color: #333; /* Dark text for contrast */
 }
 
 /* Ensure the root element and main app container use full height */
@@ -28,6 +30,7 @@ main {
 .markdown-content h1 {
     font-size: 2em;
     margin-bottom: 0.5em;
+    color: #ff4500; /* Bright orange for headings */
 }
 
 .markdown-content p {
@@ -35,3 +38,20 @@ main {
 }
 
 /* Add more styles as needed */
+
+h1, h2, h3 {
+    color: #ff4500; /* Bright orange for headings */
+}
+
+button {
+    background-color: #ff4500; /* Bright orange buttons */
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff6347; /* Slightly lighter orange on hover */
+}

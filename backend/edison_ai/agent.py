@@ -354,3 +354,7 @@ def build_graph():
 
 memory = MemorySaver()
 graph: CompiledGraph = build_graph().compile(checkpointer=memory)
+
+def generate_response(input_text):
+    # Add personality to the AI's responses
+    return f"Edison AI here! {input_text} sounds interesting. Let's explore it together!"

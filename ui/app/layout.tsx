@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Edison AI",
+  title: "Edison AI - Your AI Teaching Assistant",
   description: "Edison AI - AI-powered learning assistant",
 };
 
