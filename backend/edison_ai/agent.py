@@ -174,7 +174,7 @@ async def summarize_transcript(state: AgentState, config: RunnableConfig) -> Age
 
         Now, please provide an explanation of the key concepts based on the following transcript:
 
-        {transcript}
+        {state.transcript}
         
         End your response with "I have explained the key concepts from the lecture transcript. If this looks good, and you are ready to move on, please let me know, so that we can move on to the next step and assess your understanding of the topic so that I can prepare a quiz for you."
     """
