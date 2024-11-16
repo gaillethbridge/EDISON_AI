@@ -77,9 +77,9 @@ async def router_assessment(state: AgentState):
         if the student is answering an assessment question, you should hydrate the StudentAssessment schema with the student's response by extracting the relevant information from the student's response.
         if the student is answering a quiz question, you should provide feedback on the student's response.
         if The student has provided a response to the assessment question, you should extract the relevant information from the student's response.
-        
-        if the student is requesting to create a quiz, you should NOT create a quiz if the student's level has not been assessed. we MUST assess the student's level before creating a quiz.
-        
+
+        Create a quiz if the student asks for one.
+
         Review the conversation and assess the student response to determine next steps in the conversation.    
         If you get this wrong, my boss will make me cry.
         """
@@ -191,8 +191,10 @@ async def summarize_transcript(state: AgentState, config: RunnableConfig) -> Age
 
 async def create_quiz(state: AgentState, config: RunnableConfig) -> AgentState:
     system_message = SystemMessage(
-        content="""
+        content=f"""
     Your role is to create a quiz based on the transcript and the student's assessed level. Follow these steps to create an effective and tailored quiz:
+
+    Here is the transcript for reference: {state.lesson_explanation}
 
     1. Analyze the transcript:
        - Identify the main topics and key concepts covered.
@@ -226,6 +228,10 @@ async def create_quiz(state: AgentState, config: RunnableConfig) -> AgentState:
 
     Output the complete quiz, including instructions, questions, and answer choices. Aim for a quiz that challenges the student appropriately while reinforcing key concepts from the transcript.
     """
+    )
+
+    console.print(
+        Panel(Markdown(state.lesson_explanation), title="Transcript", border_style="green")
     )
     response = await model.ainvoke([system_message, *state.messages])
     console.print(
@@ -339,7 +345,7 @@ def build_graph():
         },
     )
     graph.set_entry_point(ROUTER)
-    graph.add_edge(SUMMARIZE_TRANSCRIPT, END)
+    graph.add_edge(SUMMARIZE_TRANSCRIPT, CREATE_QUIZ)
     graph.add_edge(ANALYZE_STUDENT_LEVEL, END)
     graph.add_edge(EXTRACT_STUDENT_RESPONSE, ANALYZE_STUDENT_LEVEL)
     graph.add_edge(CREATE_QUIZ, END)
