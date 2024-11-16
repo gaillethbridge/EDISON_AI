@@ -4,7 +4,5 @@ export interface AgentState {
   assessment?: any[];
   lesson_explanation?: string;
   logs?: any[];
-
- 
- 
+  transcript?: string;
 }
