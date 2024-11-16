@@ -23,3 +23,15 @@ main {
     min-height: -webkit-fill-available;
   }
 }
+
+/* Add styles for markdown content */
+.markdown-content h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.markdown-content p {
+    margin-bottom: 1em;
+}
+
+/* Add more styles as needed */

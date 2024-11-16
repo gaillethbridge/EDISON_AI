@@ -1,3 +1,4 @@
+import ReactMarkdown from 'react-markdown';
 import { AgentState } from "../../lib/types";
 
 interface TextDisplayProps {
@@ -10,7 +11,7 @@ export function TextDisplay({ state }: TextDisplayProps) {
       <div className="text-sm text-gray-700">
         <div className="h-[calc(100vh-2rem)] overflow-y-auto">
           <p className="text-lg font-bold">Video transcript</p>
-          {state.transcript}
+          <ReactMarkdown>{state.lesson_explanation}</ReactMarkdown>
         </div>
       </div>
     </div>

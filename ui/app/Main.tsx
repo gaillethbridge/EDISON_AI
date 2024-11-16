@@ -35,7 +35,7 @@ export function Main() {
       <TextDisplay state={agentState} />
 
       {/* Right sidebar for chat */}
-      <div className="w-120 border-l border-gray-200">
+      <div className="w-96 border-l border-gray-200">
         <CopilotChat
           className="h-full"
           instructions={"You are assisting the user as best as you can. Answer in the best way possible given the data you have."}

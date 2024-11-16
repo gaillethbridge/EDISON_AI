@@ -3,6 +3,7 @@
 import { CopilotKit } from "@copilotkit/react-core";
 import { Main } from "./Main";
 import "@copilotkit/react-ui/styles.css";
+import ReactMarkdown from 'react-markdown';
 
 export default function Home() {
   return (
