@@ -6,13 +6,14 @@ import { TextMessage, MessageRole } from "@copilotkit/runtime-client-gql";
 import { CopilotChat } from "@copilotkit/react-ui";
 import { Progress } from "./components/ui/Progress";
 import { AgentState } from "./lib/types";
+import { TextDisplay } from "./components/ui/TextDisplay";
 
 export function Main() {
   const {
     state: agentState,
   } = useCoAgent<AgentState>({
     name: "edison_ai",
-    initialState: { 
+    initialState: {
       messages: [{ content: "" }],
     },
   });
@@ -30,7 +31,9 @@ export function Main() {
   return (
     <div className="flex h-full w-full">
       {/* Main content area */}
-      
+
+      <TextDisplay state={agentState} />
+
       {/* Right sidebar for chat */}
       <div className="w-120 border-l border-gray-200">
         <CopilotChat
