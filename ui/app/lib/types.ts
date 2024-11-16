@@ -5,4 +5,5 @@ export interface AgentState {
   lesson_explanation?: string;
   logs?: any[];
   transcript?: string;
+  quiz? : string
 }

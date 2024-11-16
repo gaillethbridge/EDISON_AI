@@ -237,7 +237,9 @@ async def create_quiz(state: AgentState, config: RunnableConfig) -> AgentState:
     console.print(
         Panel(Markdown(response.content), title="Generated Quiz", border_style="yellow")
     )
-    return {"messages": [AIMessage(content=response.content)]}
+    return {"messages": [AIMessage(content=response.content)],
+            "quiz": response.content
+            }
 
 
 async def extract_question_response(

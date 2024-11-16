@@ -3,6 +3,7 @@ from langchain_core.messages import AnyMessage
 from langgraph.graph.message import add_messages
 from pydantic import BaseModel, Field
 from typing import TypedDict
+
 # Constants for different actions
 SUMMARIZE_TRANSCRIPT = "summarize_transcript"
 ANALYZE_STUDENT_LEVEL = "analyze_student_level"
@@ -78,3 +79,4 @@ class AgentState(BaseModel):
     lesson_explanation: Optional[str] = Field(default=None)
     logs: List[Log] = Field(default_factory=list)
     transcript: Optional[str] = Field(default=None)
+    quiz: Optional[str] = Field(default=None)
